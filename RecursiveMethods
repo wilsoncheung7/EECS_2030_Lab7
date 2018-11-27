@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -68,7 +69,19 @@ public class RecursiveMethods {
 	 */
 	public List<Integer> fibList(int n) {
 		/* Your Task. */
-		return null;
+		if(n==2) {
+			List<Integer> fib=new ArrayList<>();
+			fib.add(1);
+			fib.add(1);
+			return fib;
+		}
+		List<Integer> fib=Arrays.asList(new Integer[n]);
+		fib.set(0, 1);
+		fib.set(1,1);
+		return fib;
+	}
+	private void fibListHelper(int i,List<Integer> fib) {
+		
 	}
 
 	/**
