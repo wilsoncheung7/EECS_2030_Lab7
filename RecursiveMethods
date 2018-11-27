@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /*
@@ -26,6 +27,10 @@ public class RecursiveMethods {
 	 *         while).
 	 */
 	public int[] fibArray(int n) {
+		if(n==1) {
+			int[] seq= {1};
+			return seq;
+		}
 		if (n == 2) {
 			int[] seq = { 1, 1 };
 			return seq;
@@ -44,10 +49,6 @@ public class RecursiveMethods {
 			seq[i]=seq[i-1]+seq[i-2];
 			fibArrayHelper(i+1,seq);
 		}
-		if(i==seq.length-1) {
-			seq[i]=seq[i-1]+seq[i-2];
-		}
-		
 	}
 
 	/**
@@ -69,30 +70,30 @@ public class RecursiveMethods {
 	 */
 	public List<Integer> fibList(int n) {
 		/* Your Task. */
+		if(n==1) {
+			List<Integer> fib=new ArrayList<>();
+			fib.add(1);
+			return fib;
+		}
 		if(n==2) {
 			List<Integer> fib=new ArrayList<>();
 			fib.add(1);
 			fib.add(1);
 			return fib;
 		}
-		List<Integer> fib=Arrays.asList(new Integer[n]);
-		fib.set(0, 1);
-		fib.set(1,1);
-		fibListHelper(2,fib);
+		List<Integer> fib=new ArrayList<>();
+		fib.add(0, 1);
+		fib.add(1,1);
+		fibListHelper(2,fib,n);
 		return fib;
 	}
-	private void fibListHelper(int i,List<Integer> fib) {
-//		fib=new ArrayList<>();
-		int n=fib.get(i);
-		if(i<fib.size()) {
-			n=fib.get(i-1)+fib.get(i-2);
-			fib.set(i, n);
-			fibListHelper(i+1,fib);
+	private void fibListHelper(int i,List<Integer> fib,int n) {
+		
+		if(i<n) {
+			fib.add(fib.get(i-1)+fib.get(i-2));
+			fibListHelper(i+1,fib,n);
 		}
-		if(i==fib.size()-1) {
-			n=fib.get(i-1)+fib.get(i-2);
-			fib.set(i, n);
-		}
+
 	}
 
 	/**
@@ -116,7 +117,10 @@ public class RecursiveMethods {
 	 */
 	public boolean isFibArray(int[] a) {
 		/* Your Task. */
-		return false;
+		if(a.length==0) {		
+			return false;
+		}
+		return Arrays.equals(a, fibArray(a.length));
 	}
 
 	/**
@@ -140,7 +144,10 @@ public class RecursiveMethods {
 	 */
 	public boolean isFibList(List<Integer> list) {
 		/* Your Task. */
-		return false;
+		if(list.size()==0) {		
+			return false;
+		}
+		return list.equals(fibList(list.size()));
 	}
 
 	/**
@@ -164,7 +171,28 @@ public class RecursiveMethods {
 	 */
 	public int[] insertIntoSortedArray(int[] a, int i) {
 		/* Your Task. */
-		return null;
+//		if(a==null) {
+//			return null;
+//		}
+		int[] insert=new int[a.length+1];
+		if(a.length==0) {
+			 insert[0]=i;
+		}
+		else {
+			sortedHelper(a,insert,i,0,false);
+		}
+//		insert[a.length]=i;
+		return insert;
+	}
+	private void sortedHelper(int[] a,int[] b,int i,int j,boolean inserted) {
+		if(j==a.length-1) {
+			
+		}
+		else {
+			if(inserted) {
+				
+			}
+		}
 	}
 
 	/**
@@ -213,7 +241,11 @@ public class RecursiveMethods {
 	 */
 	public int[] mergeSortedArrays(int[] left, int[] right) {
 		/* Your Task. */
-		return null;
+		int[] center=new int[left.length+right.length];
+		return center;
+	}
+	private void mergeHelper(int[] left, int[] right,int m,int n) {
+		int k=m+n-1;
 	}
 
 	/**
