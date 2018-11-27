@@ -78,10 +78,21 @@ public class RecursiveMethods {
 		List<Integer> fib=Arrays.asList(new Integer[n]);
 		fib.set(0, 1);
 		fib.set(1,1);
+		fibListHelper(2,fib);
 		return fib;
 	}
 	private void fibListHelper(int i,List<Integer> fib) {
-		
+//		fib=new ArrayList<>();
+		int n=fib.get(i);
+		if(i<fib.size()) {
+			n=fib.get(i-1)+fib.get(i-2);
+			fib.set(i, n);
+			fibListHelper(i+1,fib);
+		}
+		if(i==fib.size()-1) {
+			n=fib.get(i-1)+fib.get(i-2);
+			fib.set(i, n);
+		}
 	}
 
 	/**
