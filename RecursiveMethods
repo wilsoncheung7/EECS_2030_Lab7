@@ -40,6 +40,7 @@ public class RecursiveMethods {
 			seq[1] = 1;
 			fibArrayHelper(2, seq); // fibArrayHelper recursively fills in the rest of seq
 			return seq;
+
 		}
 	}
 
@@ -172,9 +173,7 @@ public class RecursiveMethods {
 	 */
 	public int[] insertIntoSortedArray(int[] a, int i) {
 		/* Your Task. */
-		// if(a==null) {
-		// return null;
-		// }
+
 		int[] b = new int[a.length + 1];
 		if (a.length == 0) {
 			b[0] = i;
@@ -187,19 +186,36 @@ public class RecursiveMethods {
 
 	private void sortedHelper(int[] a, int[] b, int i, int j, boolean inserted) {
 		if (j == a.length - 1) {
-			sortedHelper(a, b, i, j, inserted);
-
-		} else {
 			if (inserted) {
-				if (a[j] > i) {
-					 b[j] = a[j];					
-					sortedHelper(a, b, i, j + 1, inserted);
-				}
+				b[j + 1] = a[j];
+				// sortedHelper(a, b, i, j + 1, inserted);
 			}
 			b[j] = i;
-			b[j + 1] = a[j];
 			inserted = true;
+			// sortedHelper(a, b, i, j + 1, inserted);
+			// return;
+		} else {
+			if (i <= a[j]) {
+				if (inserted) {
+					// b[j] = a[j];
+					b[j + 1] = a[j];
+					sortedHelper(a, b, i, j + 1, inserted);
+				}
+				b[j] = i;
+				inserted = true;
+				sortedHelper(a, b, i, j + 1, inserted);
+			} else if(i>a[j]) {
+				// b[j] = i;
+				if (inserted) {
+					b[j + 1] = a[j];
+					sortedHelper(a, b, i, j + 1, inserted);
+				}
+				b[j] = a[j];
+				inserted = true;
+				sortedHelper(a, b, i, j + 1, inserted);
+			}
 		}
+
 	}
 
 	/**
@@ -252,13 +268,13 @@ public class RecursiveMethods {
 		return result;
 	}
 
-	private void mergeHelper(int[] left, int[] right, int m, int n) {
-		m-=1;
-		n-=1;
-		int	k = m + n - 1;
-		if(m>-1&&n>-1) {
-			if(left[m]>right[n]) {
-				
+	private void mergeHelper(int[] left, int[] right, int[] result, int m, int n) {
+		m -= 1;
+		n -= 1;
+		int k = m + n - 1;
+		if (m > -1 && n > -1) {
+			if (left[m] > right[n]) {
+
 			}
 		}
 	}
