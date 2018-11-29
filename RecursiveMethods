@@ -175,44 +175,49 @@ public class RecursiveMethods {
 		/* Your Task. */
 
 		int[] b = new int[a.length + 1];
+		boolean inserted = false;
 		if (a.length == 0) {
 			b[0] = i;
 		} else {
-			sortedHelper(a, b, i, 0, false);
+			sortedHelper(a, b, i, 0, inserted);
 		}
 		// insert[a.length]=i;
 		return b;
 	}
 
 	private void sortedHelper(int[] a, int[] b, int i, int j, boolean inserted) {
-		if (j == a.length - 1) {
+		if (j == a.length) {
 			if (inserted) {
-				b[j + 1] = a[j];
-				// sortedHelper(a, b, i, j + 1, inserted);
-			}
+			b[j] = a[j-1];
+				
+			}else {
 			b[j] = i;
-			inserted = true;
-			// sortedHelper(a, b, i, j + 1, inserted);
-			// return;
+			
+			}
+			
 		} else {
-			if (i <= a[j]) {
+			if (i >=a[j]) {
 				if (inserted) {
 					// b[j] = a[j];
-					b[j + 1] = a[j];
+					b[j] = a[j-1];
 					sortedHelper(a, b, i, j + 1, inserted);
 				}
+				else {
+				b[j] = a[j];
+				
+				sortedHelper(a, b, i, j + 1, inserted);
+				}
+			} else if(i<a[j]) {
+				// b[j] = i;
+				if (inserted) {
+					b[j] = a[j-1];
+					sortedHelper(a, b, i, j + 1, inserted);
+				}
+				else {
 				b[j] = i;
 				inserted = true;
 				sortedHelper(a, b, i, j + 1, inserted);
-			} else if(i>a[j]) {
-				// b[j] = i;
-				if (inserted) {
-					b[j + 1] = a[j];
-					sortedHelper(a, b, i, j + 1, inserted);
 				}
-				b[j] = a[j];
-				inserted = true;
-				sortedHelper(a, b, i, j + 1, inserted);
 			}
 		}
 
