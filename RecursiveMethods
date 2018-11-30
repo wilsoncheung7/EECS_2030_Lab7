@@ -173,7 +173,6 @@ public class RecursiveMethods {
 	 */
 	public int[] insertIntoSortedArray(int[] a, int i) {
 		/* Your Task. */
-
 		int[] b = new int[a.length + 1];
 		boolean inserted = false;
 		if (a.length == 0) {
@@ -181,7 +180,6 @@ public class RecursiveMethods {
 		} else {
 			sortedHelper(a, b, i, 0, inserted);
 		}
-		// insert[a.length]=i;
 		return b;
 	}
 
@@ -189,16 +187,12 @@ public class RecursiveMethods {
 		if (j == a.length) {
 			if (inserted) {
 				b[j] = a[j - 1];
-
 			} else {
 				b[j] = i;
-
 			}
-
 		} else {
 			if (i >= a[j]) {
 				if (inserted) {
-					// b[j] = a[j];
 					b[j] = a[j - 1];
 					sortedHelper(a, b, i, j + 1, inserted);
 				} else {
@@ -207,7 +201,6 @@ public class RecursiveMethods {
 					sortedHelper(a, b, i, j + 1, inserted);
 				}
 			} else if (i < a[j]) {
-				// b[j] = i;
 				if (inserted) {
 					b[j] = a[j - 1];
 					sortedHelper(a, b, i, j + 1, inserted);
@@ -308,13 +301,12 @@ public class RecursiveMethods {
 	public int[] mergeSortedArrays(int[] left, int[] right) {
 		/* Your Task. */
 		int[] result = new int[left.length + right.length];
-		if (left.length == 0) {
+		if (left.length == 0)
 			return right;
-		} else if (right.length == 0) {
+		else if (right.length == 0)
 			return left;
-		} else if (result.length == 0) {
+		else if (result.length == 0)
 			return result;
-		}
 		mergeHelper(left, right, result, 0, 0, 0);
 		return result;
 	}
@@ -332,26 +324,24 @@ public class RecursiveMethods {
 				else if (left[m] < right[n])
 					result[k] = left[m];
 				else {
-					result[k] = left[n];
+					result[k] = left[m];
 					result[k + 1] = right[n];
 				}
 			}
 		} else {
 			if (m == left.length) {
 				result[k] = right[n];
-				mergeHelper(left,right,result,m,n+1,k+1);
-			}
-			else if (n == right.length) {
+				mergeHelper(left, right, result, m, n + 1, k + 1);
+			} else if (n == right.length) {
 				result[k] = left[m];
-				mergeHelper(left,right,result,m+1,n,k+1);
-			}
-			else {
+				mergeHelper(left, right, result, m + 1, n, k + 1);
+			} else {
 				if (left[m] > right[n]) {
 					result[k] = right[n];
-					mergeHelper(left, right, result, m , n+1, k + 1);
+					mergeHelper(left, right, result, m, n + 1, k + 1);
 				} else if (left[m] < right[n]) {
 					result[k] = left[m];
-					mergeHelper(left, right, result, m+1 , n , k + 1);
+					mergeHelper(left, right, result, m + 1, n, k + 1);
 				} else {
 					result[k] = left[n];
 					result[k + 1] = right[n];
@@ -382,6 +372,54 @@ public class RecursiveMethods {
 	 *         while).
 	 */
 	public List<Integer> mergeSortedLists(List<Integer> left, List<Integer> right) {
-		return null;
+		List<Integer> result = new ArrayList<>();
+		if (left.size() == 0)
+			return right;
+		else if (right.size() == 0)
+			return left;
+		else if (result.size() == 0)
+			return result;
+		mergeHelper2(left, right, result, 0, 0, 0);
+		return result;
+	}
+
+	private void mergeHelper2(List<Integer> left, List<Integer> right, List<Integer> result, int m, int n, int k) {
+		if (k == result.size() - 1) {
+			if (m == left.size())
+				result.add(k,right.get(n));
+			else if (n == right.size())
+				result.add(k,left.get(m));
+			else {
+				if (left.get(m) > right.get(n))
+					result.add(k,right.get(n));
+				else if (left.get(m) < right.get(n))
+					result.add(k,left.get(m));
+				else {
+					result.add(k,left.get(m));
+					result.add(k+1,right.get(n));
+				}
+			}
+		} else {
+			if (m == left.size()) {
+				result.add(k,right.get(n));
+				mergeHelper2(left, right, result, m, n + 1, k + 1);
+			}
+			if (n == right.size()) {
+				result.add(k,left.get(m));
+				mergeHelper2(left, right, result, m + 1, n, k + 1);
+			} else {
+				if (left.get(m) > right.get(n)) {
+					result.add(k,right.get(n));
+					mergeHelper2(left, right, result, m, n + 1, k + 1);
+				} else if (left.get(m) < right.get(n)) {
+					result.add(k,left.get(m));
+					mergeHelper2(left, right, result, m + 1, n, k + 1);
+				} else {
+					result.add(k,left.get(m));
+					result.add(k+1,right.get(n));
+					mergeHelper2(left, right, result, m + 1, n + 1, k + 1);
+				}
+			}
+		}
 	}
 }
