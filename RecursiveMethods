@@ -243,46 +243,115 @@ public class RecursiveMethods {
 	 *         while).
 	 */
 	public List<Integer> insertIntoSortedList(List<Integer> list, int i) {
-		/* Your Task. */
-		return null;
-	}
+        /* Your Task. */
+        List<Integer> sorted = new ArrayList<>();
+        boolean inserted = false;
+        if(list.size()==0) {
+            sorted.add(i);
+        }
+        else {
+            sortedHelper2(list,sorted,i,0,inserted);
+        }
+        return sorted;
+    }
+    
+    private void sortedHelper2(List<Integer> list,List<Integer> sorted, int i, int j, boolean inserted) {
+        if (j == list.size()) {
+            if (inserted) {
+                sorted.add(j,list.get(j-1));
 
-	/**
-	 * Given two sorted arrays left and right, return a sorted array of size
-	 * left.length + right.length, consisting of all elements of arrays left and
-	 * right.
-	 * 
-	 * @param left
-	 *            a sorted array
-	 * @param right
-	 *            a sorted array
-	 * @return a sorted array of size left.length + right.length, consisting of all
-	 *         elements of arrays left and right. e.g., mergeSortedArrays({1, 3, 5,
-	 *         7}, {2, 4, 6, 8}) returns a sorted array {1, 2, 3, 4, 5, 6, 7, 8}.
-	 * 
-	 *         You are forbidden to use the mergeSortedLists method below to solve
-	 *         this problem.
-	 * 
-	 *         Requirement: You are required to implement all methods recursively.
-	 *         You receive a zero if there is any occurrence of a loop (e.g., for,
-	 *         while).
-	 */
-	public int[] mergeSortedArrays(int[] left, int[] right) {
-		/* Your Task. */
-		int[] result = new int[left.length + right.length];
-		return result;
-	}
+            } else {
+                sorted.add(j,i);
+                
 
-	private void mergeHelper(int[] left, int[] right, int[] result, int m, int n) {
-		m -= 1;
-		n -= 1;
-		int k = m + n - 1;
-		if (m > -1 && n > -1) {
-			if (left[m] > right[n]) {
+            }
 
-			}
-		}
-	}
+        } else {
+            if (i >= list.get(j)) {
+                if (inserted) {
+                    sorted.add(j,list.get(j-1));
+                    sortedHelper2(list, sorted, i, j + 1, inserted);
+                } else {
+                    sorted.add(j,list.get(j));
+
+                    sortedHelper2(list, sorted, i, j + 1, inserted);
+                }
+            } else if (i < list.get(j)) {
+                if (inserted) {
+                    sorted.add(j,list.get(j-1));
+                    sortedHelper2(list, sorted, i, j + 1, inserted);
+                } else {
+                    sorted.add(j,i);
+                    inserted = true;
+                    sortedHelper2(list, sorted, i, j + 1, inserted);
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Given two sorted arrays left and right, return a sorted array of size
+     * left.length + right.length, consisting of all elements of arrays left and
+     * right.
+     *
+     * @param left
+     *            a sorted array
+     * @param right
+     *            a sorted array
+     * @return a sorted array of size left.length + right.length, consisting of all
+     *         elements of arrays left and right. e.g., mergeSortedArrays({1, 3, 5,
+     *         7}, {2, 4, 6, 8}) returns a sorted array {1, 2, 3, 4, 5, 6, 7, 8}.
+     *
+     *         You are forbidden to use the mergeSortedLists method below to solve
+     *         this problem.
+     *
+     *         Requirement: You are required to implement all methods recursively.
+     *         You receive a zero if there is any occurrence of a loop (e.g., for,
+     *         while).
+     */
+    public int[] mergeSortedArrays(int[] left, int[] right) {
+        /* Your Task. */
+        int[] result = new int[left.length + right.length];
+        if(left.length==0) {
+            return right;
+        }
+        else if(right.length==0) {
+            return left;
+        }
+        else if(result.length==0) {
+            return result;
+        }
+        else {
+            mergeHelper(left,right,result,0,0,0);
+        }
+        return result;
+    }
+
+    private void mergeHelper(int[] left, int[] right, int[] result, int m, int n,int k) {
+
+        if(k==result.length-1) {
+            if(m==left.length)
+                result[k]=left[m];
+            
+            else if(n==right.length)
+                result[k]=right[n];
+            else {
+                if(left[m]>right[n])
+                result[k]=left[m];
+                else if(left[m]<right[n])
+                result[k]=right[n];
+                else {
+                result[k]=left[m];
+                result[k+1]=right[n];
+                }
+            }
+        }
+        else {
+            
+        }
+    }
+
 
 	/**
 	 * Given two sorted lists left and right, return a sorted list of size
