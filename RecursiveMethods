@@ -118,10 +118,16 @@ public class RecursiveMethods {
 	 */
 	public boolean isFibArray(int[] a) {
 		/* Your Task. */
-		if (a.length == 0) {
-			return false;
-		}
-		return Arrays.equals(a, fibArray(a.length));
+		if (a.length == 0)return false;
+		if (a.length == 1)return a[0] == 1;
+      	if (a[0]!=1 || a[1]!=1)return false;
+		return fibArrayHelper2(2, a);
+	}
+
+	private boolean fibArrayHelper2(int i, int[] a) {
+		if(i>=a.length)return true;
+		boolean result = a[i] == a[i - 1] + a[i - 2];
+		return result && fibArrayHelper2(i + 1, a);
 	}
 
 	/**
@@ -196,7 +202,6 @@ public class RecursiveMethods {
 					sortedHelper(a, b, i, j + 1, inserted);
 				} else {
 					b[j] = a[j];
-
 					sortedHelper(a, b, i, j + 1, inserted);
 				}
 			} else if (i < a[j]) {
@@ -372,52 +377,52 @@ public class RecursiveMethods {
 	 */
 	public List<Integer> mergeSortedLists(List<Integer> left, List<Integer> right) {
 		List<Integer> result = new ArrayList<>();
-		int total=left.size()+right.size();
+		int total = left.size() + right.size();
 		if (left.size() == 0)
 			return right;
 		else if (right.size() == 0)
 			return left;
 		else if (total == 0)
 			return result;
-		mergeHelper2(left, right, result, 0, 0, 0,total);
+		mergeHelper2(left, right, result, 0, 0, 0, total);
 		return result;
 	}
 
-	private void mergeHelper2(List<Integer> left, List<Integer> right, List<Integer> result, int m, int n, int k,int total) {
-		if (k == total-1) {
+	private void mergeHelper2(List<Integer> left, List<Integer> right, List<Integer> result, int m, int n, int k,
+			int total) {
+		if (k == total - 1) {
 			if (m == left.size())
-				result.add(k,right.get(n));
+				result.add(k, right.get(n));
 			else if (n == right.size())
-				result.add(k,left.get(m));
+				result.add(k, left.get(m));
 			else {
 				if (left.get(m) > right.get(n))
-					result.add(k,right.get(n));
+					result.add(k, right.get(n));
 				else if (left.get(m) < right.get(n))
-					result.add(k,left.get(m));
+					result.add(k, left.get(m));
 				else {
-					result.add(k,left.get(m));
-					result.add(k+1,right.get(n));
+					result.add(k, left.get(m));
+					result.add(k + 1, right.get(n));
 				}
 			}
 		} else {
 			if (m == left.size()) {
-				result.add(k,right.get(n));
-				mergeHelper2(left, right, result, m, n + 1, k + 1,total);
-			}
-			else if (n == right.size()) {
-				result.add(k,left.get(m));
-				mergeHelper2(left, right, result, m + 1, n, k + 1,total);
+				result.add(k, right.get(n));
+				mergeHelper2(left, right, result, m, n + 1, k + 1, total);
+			} else if (n == right.size()) {
+				result.add(k, left.get(m));
+				mergeHelper2(left, right, result, m + 1, n, k + 1, total);
 			} else {
 				if (left.get(m) > right.get(n)) {
-					result.add(k,right.get(n));
-					mergeHelper2(left, right, result, m, n + 1, k + 1,total);
+					result.add(k, right.get(n));
+					mergeHelper2(left, right, result, m, n + 1, k + 1, total);
 				} else if (left.get(m) < right.get(n)) {
-					result.add(k,left.get(m));
-					mergeHelper2(left, right, result, m + 1, n, k + 1,total);
+					result.add(k, left.get(m));
+					mergeHelper2(left, right, result, m + 1, n, k + 1, total);
 				} else {
-					result.add(k,left.get(m));
-					result.add(k+1,right.get(n));
-					mergeHelper2(left, right, result, m + 1, n + 1, k + 1,total);
+					result.add(k, left.get(m));
+					result.add(k + 1, right.get(n));
+					mergeHelper2(left, right, result, m + 1, n + 1, k + 1, total);
 				}
 			}
 		}
