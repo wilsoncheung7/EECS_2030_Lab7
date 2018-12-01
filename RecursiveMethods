@@ -118,14 +118,18 @@ public class RecursiveMethods {
 	 */
 	public boolean isFibArray(int[] a) {
 		/* Your Task. */
-		if (a.length == 0)return false;
-		if (a.length == 1)return a[0] == 1;
-      	if (a[0]!=1 || a[1]!=1)return false;
+		if (a.length == 0)
+			return false;
+		if (a.length == 1)
+			return a[0] == 1;
+		if (a[0] != 1 || a[1] != 1)
+			return false;
 		return fibArrayHelper2(2, a);
 	}
 
 	private boolean fibArrayHelper2(int i, int[] a) {
-		if(i>=a.length)return true;
+		if (i >= a.length)
+			return true;
 		boolean result = a[i] == a[i - 1] + a[i - 2];
 		return result && fibArrayHelper2(i + 1, a);
 	}
@@ -151,17 +155,22 @@ public class RecursiveMethods {
 	 */
 	public boolean isFibList(List<Integer> list) {
 		/* Your Task. */
-		if (list.size() == 0)return false;
-		if(list.size()==1)return list.get(0)==1;
-		if(list.get(0)!=1||list.get(1)!=1)return false;
-		return fibListHelper2(2,list);
+		if (list.size() == 0)
+			return false;
+		if (list.size() == 1)
+			return list.get(0) == 1;
+		if (list.get(0) != 1 || list.get(1) != 1)
+			return false;
+		return fibListHelper2(2, list);
 	}
 
-	private boolean fibListHelper2(int i,List<Integer> list) {
-		if(i>=list.size())return true;
-		boolean result = list.get(i)==list.get(i-1)+list.get(i-2);
-		return result&&fibListHelper2(i+1,list);
+	private boolean fibListHelper2(int i, List<Integer> list) {
+		if (i >= list.size())
+			return true;
+		boolean result = list.get(i) == list.get(i - 1) + list.get(i - 2);
+		return result && fibListHelper2(i + 1, list);
 	}
+
 	/**
 	 * Given a sorted input array a, return a sorted array of size a.length + 1,
 	 * consisting of all elements of array a and integer i.
