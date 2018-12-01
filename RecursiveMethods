@@ -151,12 +151,17 @@ public class RecursiveMethods {
 	 */
 	public boolean isFibList(List<Integer> list) {
 		/* Your Task. */
-		if (list.size() == 0) {
-			return false;
-		}
-		return list.equals(fibList(list.size()));
+		if (list.size() == 0)return false;
+		if(list.size()==1)return list.get(0)==1;
+		if(list.get(0)!=1||list.get(1)!=1)return false;
+		return fibListHelper2(2,list);
 	}
 
+	private boolean fibListHelper2(int i,List<Integer> list) {
+		if(i>=list.size())return true;
+		boolean result = list.get(i)==list.get(i-1)+list.get(i-2);
+		return result&&fibListHelper2(i+1,list);
+	}
 	/**
 	 * Given a sorted input array a, return a sorted array of size a.length + 1,
 	 * consisting of all elements of array a and integer i.
