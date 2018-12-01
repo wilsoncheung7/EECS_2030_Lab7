@@ -404,7 +404,7 @@ public class RecursiveMethods {
 				result.add(k,right.get(n));
 				mergeHelper2(left, right, result, m, n + 1, k + 1,total);
 			}
-			if (n == right.size()) {
+			else if (n == right.size()) {
 				result.add(k,left.get(m));
 				mergeHelper2(left, right, result, m + 1, n, k + 1,total);
 			} else {
